@@ -1,0 +1,694 @@
+links:
+- node_in: oscout0
+  node_out: appendtables0
+  slot_in: data
+  slot_out: output_table
+- node_in: welfordsztransform6
+  node_out: biotuner0
+  slot_in: data
+  slot_out: harmsim
+- node_in: extendedtable1
+  node_out: biotuner0
+  slot_in: array_input5
+  slot_out: peaks_ratios_tuning
+- node_in: extendedtable1
+  node_out: biotuner0
+  slot_in: array_input3
+  slot_out: peaks
+- node_in: extendedtable1
+  node_out: biotuner0
+  slot_in: array_input4
+  slot_out: amps
+- node_in: biotuner0
+  node_out: buffer0
+  slot_in: data
+  slot_out: out
+- node_in: psd0
+  node_out: buffer0
+  slot_in: data
+  slot_out: out
+- node_in: lempelziv0
+  node_out: buffer0
+  slot_in: data
+  slot_out: out
+- node_in: appendtables0
+  node_out: extendedtable0
+  slot_in: table1
+  slot_out: table
+- node_in: appendtables0
+  node_out: extendedtable1
+  slot_in: table2
+  slot_out: table
+- node_in: welfordsztransform5
+  node_out: lempelziv0
+  slot_in: data
+  slot_out: lzc
+- node_in: select0
+  node_out: lslclient0
+  slot_in: data
+  slot_out: out
+- node_in: welfordsztransform0
+  node_out: powerbandeeg0
+  slot_in: data
+  slot_out: delta
+- node_in: welfordsztransform2
+  node_out: powerbandeeg0
+  slot_in: data
+  slot_out: theta
+- node_in: welfordsztransform1
+  node_out: powerbandeeg0
+  slot_in: data
+  slot_out: alpha
+- node_in: welfordsztransform3
+  node_out: powerbandeeg0
+  slot_in: data
+  slot_out: lowbeta
+- node_in: welfordsztransform4
+  node_out: powerbandeeg0
+  slot_in: data
+  slot_out: highbeta
+- node_in: powerbandeeg0
+  node_out: psd0
+  slot_in: data
+  slot_out: psd
+- node_in: buffer0
+  node_out: select0
+  slot_in: val
+  slot_out: out
+- node_in: extendedtable0
+  node_out: welfordsztransform0
+  slot_in: array_input1
+  slot_out: normalized
+- node_in: extendedtable0
+  node_out: welfordsztransform1
+  slot_in: array_input3
+  slot_out: normalized
+- node_in: extendedtable0
+  node_out: welfordsztransform2
+  slot_in: array_input2
+  slot_out: normalized
+- node_in: extendedtable0
+  node_out: welfordsztransform3
+  slot_in: array_input4
+  slot_out: normalized
+- node_in: extendedtable0
+  node_out: welfordsztransform4
+  slot_in: array_input5
+  slot_out: normalized
+- node_in: extendedtable1
+  node_out: welfordsztransform5
+  slot_in: array_input1
+  slot_out: normalized
+- node_in: extendedtable1
+  node_out: welfordsztransform6
+  slot_in: array_input2
+  slot_out: normalized
+nodes:
+  appendtables0:
+    _type: AppendTables
+    category: misc
+    gui_kwargs:
+      pos:
+      - 1707
+      - -29
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 10.0
+          vmax: 60.0
+          vmin: 0.0
+  biotuner0:
+    _type: Biotuner
+    category: analysis
+    gui_kwargs:
+      pos:
+      - 872
+      - 423
+    params:
+      biotuner:
+        delta_lim:
+          _value: 250
+          vmax: 300
+          vmin: 1
+        f_max:
+          _value: 30.0
+          vmax: 100.0
+          vmin: 1.0
+        f_min:
+          _value: 2.0
+          vmax: 50.0
+          vmin: 0.1
+        n_harm_extended:
+          _value: 3
+          vmax: 10
+          vmin: 1
+        n_harm_subharm:
+          _value: 3
+          vmax: 10
+          vmin: 1
+        n_peaks:
+          _value: 5
+          vmax: 10
+          vmin: 1
+        peaks_function:
+          _value: EMD
+          options:
+          - EMD
+          - fixed
+          - harmonic_recurrence
+          - EIMC
+        precision:
+          _value: 0.1
+          vmax: 10.0
+          vmin: 0.01
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 0.1
+          vmax: 60.0
+          vmin: 0.0
+  buffer0:
+    _type: Buffer
+    category: signal
+    gui_kwargs:
+      pos:
+      - 669
+      - 231
+    params:
+      buffer:
+        axis:
+          _value: -1
+          vmax: 3
+          vmin: -1
+        reset:
+          _value: false
+          trigger: true
+        size:
+          _value: 1000
+          vmax: 5000
+          vmin: 1
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+  eegrecording0:
+    _type: EEGRecording
+    category: inputs
+    gui_kwargs:
+      pos:
+      - 269
+      - 133
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      recording:
+        file_path:
+          _value: ''
+          options: null
+        file_sfreq:
+          _value: 256.0
+          vmax: 1000
+          vmin: 0.0
+        source_name:
+          _value: goofi
+          options: null
+        stream_name:
+          _value: goofi-stream
+          options: null
+        use_example_data:
+          _value: true
+          trigger: false
+  extendedtable0:
+    _type: ExtendedTable
+    category: inputs
+    gui_kwargs:
+      pos:
+      - 1439
+      - -298
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      table:
+        param1:
+          _value: delta
+          options: null
+        param10:
+          _value: value10
+          options: null
+        param2:
+          _value: theta
+          options: null
+        param3:
+          _value: alpha
+          options: null
+        param4:
+          _value: lowbeta
+          options: null
+        param5:
+          _value: highbeta
+          options: null
+        param6:
+          _value: value6
+          options: null
+        param7:
+          _value: value7
+          options: null
+        param8:
+          _value: value8
+          options: null
+        param9:
+          _value: value9
+          options: null
+  extendedtable1:
+    _type: ExtendedTable
+    category: inputs
+    gui_kwargs:
+      pos:
+      - 1441
+      - 61
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      table:
+        param1:
+          _value: lz
+          options: null
+        param10:
+          _value: value10
+          options: null
+        param2:
+          _value: harmsim
+          options: null
+        param3:
+          _value: peaks
+          options: null
+        param4:
+          _value: amps
+          options: null
+        param5:
+          _value: tuning
+          options: null
+        param6:
+          _value: value6
+          options: null
+        param7:
+          _value: value7
+          options: null
+        param8:
+          _value: value8
+          options: null
+        param9:
+          _value: value9
+          options: null
+  lempelziv0:
+    _type: LempelZiv
+    category: analysis
+    gui_kwargs:
+      pos:
+      - 933
+      - 213
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      lempel_ziv:
+        axis:
+          _value: -1
+          vmax: 3
+          vmin: -1
+        binarization:
+          _value: mean
+          options:
+          - mean
+          - median
+  lslclient0:
+    _type: LSLClient
+    category: inputs
+    gui_kwargs:
+      pos:
+      - 226
+      - 245
+    params:
+      common:
+        autotrigger:
+          _value: true
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      lsl_stream:
+        refresh:
+          _value: true
+          trigger: true
+        source_name:
+          _value: goofi-stream
+          options: null
+        stream_name:
+          _value: ''
+          options: null
+  oscout0:
+    _type: OSCOut
+    category: outputs
+    gui_kwargs:
+      pos:
+      - 2032
+      - 93
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 10.0
+          vmax: 60.0
+          vmin: 0.0
+      osc:
+        address:
+          _value: localhost
+          options: null
+        broadcast:
+          _value: false
+          trigger: false
+        bundle:
+          _value: false
+          trigger: false
+        port:
+          _value: 5070
+          vmax: 65535
+          vmin: 0
+        prefix:
+          _value: /goofi
+          options: null
+  powerbandeeg0:
+    _type: PowerBandEEG
+    category: analysis
+    gui_kwargs:
+      pos:
+      - 1084
+      - -117
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      powerband:
+        power_type:
+          _value: relative
+          options:
+          - absolute
+          - relative
+  psd0:
+    _type: PSD
+    category: signal
+    gui_kwargs:
+      pos:
+      - 884
+      - -114
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      psd:
+        f_max:
+          _value: 40.0
+          vmax: 10000.0
+          vmin: 1.0
+        f_min:
+          _value: 1.0
+          vmax: 9999.0
+          vmin: 0.01
+        method:
+          _value: welch
+          options:
+          - fft
+          - welch
+        noverlap:
+          _value: 100
+          vmax: 10000
+          vmin: 0
+        precision:
+          _value: 0.1
+          vmax: 10.0
+          vmin: 0.01
+        smooth_welch:
+          _value: 1
+          vmax: 10
+          vmin: 1
+  select0:
+    _type: Select
+    category: array
+    gui_kwargs:
+      pos:
+      - 444
+      - 231
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      select:
+        axis:
+          _value: 0
+          vmax: 3
+          vmin: -1
+        exclude:
+          _value: ''
+          options: null
+        include:
+          _value: Cz
+          options: null
+  welfordsztransform0:
+    _type: WelfordsZTransform
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1231
+      - -494
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      welford:
+        biased_std:
+          _value: false
+          trigger: false
+        outlier_stds:
+          _value: 4.0
+          vmax: 1.0
+          vmin: 0.0
+        reset:
+          _value: false
+          trigger: true
+  welfordsztransform1:
+    _type: WelfordsZTransform
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1234
+      - -406
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      welford:
+        biased_std:
+          _value: false
+          trigger: false
+        outlier_stds:
+          _value: 4.0
+          vmax: 1.0
+          vmin: 0.0
+        reset:
+          _value: false
+          trigger: true
+  welfordsztransform2:
+    _type: WelfordsZTransform
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1432
+      - -498
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      welford:
+        biased_std:
+          _value: false
+          trigger: false
+        outlier_stds:
+          _value: 4.0
+          vmax: 1.0
+          vmin: 0.0
+        reset:
+          _value: false
+          trigger: true
+  welfordsztransform3:
+    _type: WelfordsZTransform
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1432
+      - -409
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      welford:
+        biased_std:
+          _value: false
+          trigger: false
+        outlier_stds:
+          _value: 4.0
+          vmax: 1.0
+          vmin: 0.0
+        reset:
+          _value: false
+          trigger: true
+  welfordsztransform4:
+    _type: WelfordsZTransform
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1232
+      - -321
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      welford:
+        biased_std:
+          _value: false
+          trigger: false
+        outlier_stds:
+          _value: 4.0
+          vmax: 1.0
+          vmin: 0.0
+        reset:
+          _value: false
+          trigger: true
+  welfordsztransform5:
+    _type: WelfordsZTransform
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1167
+      - 189
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      welford:
+        biased_std:
+          _value: false
+          trigger: false
+        outlier_stds:
+          _value: 4.0
+          vmax: 1.0
+          vmin: 0.0
+        reset:
+          _value: false
+          trigger: true
+  welfordsztransform6:
+    _type: WelfordsZTransform
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1117
+      - 422
+    params:
+      common:
+        autotrigger:
+          _value: false
+          trigger: false
+        max_frequency:
+          _value: 30.0
+          vmax: 60.0
+          vmin: 0.0
+      welford:
+        biased_std:
+          _value: false
+          trigger: false
+        outlier_stds:
+          _value: 4.0
+          vmax: 1.0
+          vmin: 0.0
+        reset:
+          _value: false
+          trigger: true
