@@ -77,8 +77,8 @@ nodes:
     category: inputs
     gui_kwargs:
       pos:
-      - 142
-      - 265
+      - 172
+      - 251
     params:
       common:
         autotrigger:
@@ -456,7 +456,7 @@ nodes:
           vmax: 1.0
           vmin: 0.0
         reset:
-          _value: false
+          _value: true
           trigger: true
   welfordsztransform1:
     _type: WelfordsZTransform
@@ -483,5 +483,5 @@ nodes:
           vmax: 1.0
           vmin: 0.0
         reset:
-          _value: false
+          _value: true
           trigger: true
