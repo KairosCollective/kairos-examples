@@ -1,0 +1,519 @@
+links:
+- node_in: select2
+  node_out: buffer0
+  slot_in: data
+  slot_out: out
+- node_in: smooth0
+  node_out: buffer1
+  slot_in: data
+  slot_out: out
+- node_in: smooth1
+  node_out: buffer3
+  slot_in: data
+  slot_out: out
+- node_in: select4
+  node_out: phiid0
+  slot_in: data
+  slot_out: PhiID
+- node_in: select3
+  node_out: phiid0
+  slot_in: data
+  slot_out: inf_dyn
+- node_in: select1
+  node_out: phiid0
+  slot_in: data
+  slot_out: IIT
+- node_in: timedelayembedding1
+  node_out: reduce0
+  slot_in: input_array
+  slot_out: out
+- node_in: buffer1
+  node_out: select1
+  slot_in: val
+  slot_out: out
+- node_in: extendedtable0
+  node_out: select1
+  slot_in: array_input2
+  slot_out: out
+- node_in: reduce0
+  node_out: select2
+  slot_in: array
+  slot_out: out
+- node_in: buffer3
+  node_out: select3
+  slot_in: val
+  slot_out: out
+- node_in: extendedtable0
+  node_out: select3
+  slot_in: array_input1
+  slot_out: out
+- node_in: phiid0
+  node_out: timedelayembedding1
+  slot_in: matrix
+  slot_out: embedded_array
+- node_in: buffer0
+  node_out: lslclient0
+  slot_in: val
+  slot_out: out
+- node_in: tablenormalization0
+  node_out: extendedtable0
+  slot_in: table
+  slot_out: table
+- node_in: oscout0
+  node_out: tablenormalization0
+  slot_in: data
+  slot_out: normalized
+- node_in: smooth2
+  node_out: buffer4
+  slot_in: data
+  slot_out: out
+- node_in: buffer4
+  node_out: select4
+  slot_in: val
+  slot_out: out
+- node_in: extendedtable0
+  node_out: select4
+  slot_in: array_input3
+  slot_out: out
+nodes:
+  buffer0:
+    _type: Buffer
+    category: signal
+    gui_kwargs:
+      pos:
+      - -570
+      - -248
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      buffer:
+        axis: -1
+        reset: false
+        size: 1000
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+  buffer1:
+    _type: Buffer
+    category: signal
+    gui_kwargs:
+      pos:
+      - 859
+      - 149
+      viewers:
+        out:
+          collapsed: false
+          height: 130
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 205
+    params:
+      buffer:
+        axis: 1
+        reset: false
+        size: 500
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+  buffer3:
+    _type: Buffer
+    category: signal
+    gui_kwargs:
+      pos:
+      - 859
+      - -154
+      viewers:
+        out:
+          collapsed: false
+          height: 120
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 195
+    params:
+      buffer:
+        axis: 1
+        reset: false
+        size: 500
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+  buffer4:
+    _type: Buffer
+    category: signal
+    gui_kwargs:
+      pos:
+      - 873
+      - 418
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      buffer:
+        axis: 1
+        reset: false
+        size: 500
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+  extendedtable0:
+    _type: ExtendedTable
+    category: inputs
+    gui_kwargs:
+      pos:
+      - 1661
+      - -105
+      viewers:
+        table:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      table:
+        param1: Storage
+        param10: value10
+        param2: II
+        param3: rtr
+        param4: value4
+        param5: value5
+        param6: value6
+        param7: value7
+        param8: value8
+        param9: value9
+  lslclient0:
+    _type: LSLClient
+    category: inputs
+    gui_kwargs:
+      pos:
+      - -785
+      - -248
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: true
+        max_frequency: 30.0
+      lsl_stream:
+        refresh: false
+        source_name: Muse00:55:DA:BB:97:E0
+        stream_name: ''
+  oscout0:
+    _type: OSCOut
+    category: outputs
+    gui_kwargs:
+      pos:
+      - 2115
+      - 136
+      viewers: {}
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      osc:
+        address: localhost
+        broadcast: false
+        bundle: false
+        port: 8000
+        prefix: /goofi
+  phiid0:
+    _type: PhiID
+    category: analysis
+    gui_kwargs:
+      pos:
+      - 392
+      - -292
+      viewers:
+        IIT:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        PhiID:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        inf_dyn:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      PhiID:
+        kind: gaussian
+        redudancy: MMI
+        tau: 5.0
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+  reduce0:
+    _type: Reduce
+    category: array
+    gui_kwargs:
+      pos:
+      - -161
+      - -246
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      reduce:
+        axis: 0
+        method: mean
+  select1:
+    _type: Select
+    category: array
+    gui_kwargs:
+      pos:
+      - 640
+      - 158
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      select:
+        axis: 1
+        exclude: ''
+        expand_asterisk: false
+        include: Integrated information
+  select2:
+    _type: Select
+    category: array
+    gui_kwargs:
+      pos:
+      - -366
+      - -242
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      select:
+        axis: 0
+        exclude: ''
+        expand_asterisk: false
+        include: AF8, AF7
+  select3:
+    _type: Select
+    category: array
+    gui_kwargs:
+      pos:
+      - 630
+      - -146
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      select:
+        axis: 1
+        exclude: ''
+        expand_asterisk: false
+        include: Storage
+  select4:
+    _type: Select
+    category: array
+    gui_kwargs:
+      pos:
+      - 661
+      - 421
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      select:
+        axis: 1
+        exclude: ''
+        expand_asterisk: false
+        include: rtr
+  smooth0:
+    _type: Smooth
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1129
+      - 83
+      viewers:
+        out:
+          collapsed: false
+          height: 250
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 325
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      smooth:
+        axis: -1
+        sigma: 8.982000350952148
+  smooth1:
+    _type: Smooth
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1131
+      - -256
+      viewers:
+        out:
+          collapsed: false
+          height: 250
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 325
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      smooth:
+        axis: -1
+        sigma: 8.194999694824219
+  smooth2:
+    _type: Smooth
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1128
+      - 441
+      viewers:
+        out:
+          collapsed: false
+          height: 230
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 305
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      smooth:
+        axis: -1
+        sigma: 8.982000350952148
+  tablenormalization0:
+    _type: TableNormalization
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1882
+      - 71
+      viewers:
+        normalized:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      minmax:
+        feature_max: 1.0
+        feature_min: 0.0
+      normalization:
+        axis: -1
+        buffer_size: 1024
+        method: z-score
+        reset: false
+      quantile:
+        n_quantiles: 1000
+        output_distribution: uniform
+      robust:
+        quantile_max: 75
+        quantile_min: 25
+        unit_variance: false
+  timedelayembedding1:
+    _type: TimeDelayEmbedding
+    category: signal
+    gui_kwargs:
+      pos:
+      - 66
+      - -244
+      viewers:
+        embedded_array:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      embedding:
+        delay: 512
+        embedding_dimension: 3
+        moire_embedding: false
