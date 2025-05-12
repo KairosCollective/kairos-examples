@@ -1,4 +1,8 @@
 links:
+- node_in: oscout0
+  node_out: appendtables0
+  slot_in: data
+  slot_out: output_table
 - node_in: welfordsztransform0
   node_out: biotuner0
   slot_in: data
@@ -7,6 +11,18 @@ links:
   node_out: biotuner0
   slot_in: data
   slot_out: cons
+- node_in: extendedtable1
+  node_out: biotuner1
+  slot_in: array_input3
+  slot_out: peaks_ratios_tuning
+- node_in: extendedtable1
+  node_out: biotuner1
+  slot_in: array_input1
+  slot_out: peaks
+- node_in: extendedtable1
+  node_out: biotuner1
+  slot_in: array_input2
+  slot_out: amps
 - node_in: biotuner0
   node_out: buffer0
   slot_in: data
@@ -18,6 +34,10 @@ links:
 - node_in: appendtables0
   node_out: extendedtable0
   slot_in: table1
+  slot_out: table
+- node_in: appendtables0
+  node_out: extendedtable1
+  slot_in: table2
   slot_out: table
 - node_in: reduce0
   node_out: lslclient0
@@ -31,30 +51,10 @@ links:
   node_out: welfordsztransform0
   slot_in: array_input1
   slot_out: normalized
-- node_in: appendtables0
-  node_out: extendedtable1
-  slot_in: table2
-  slot_out: table
-- node_in: extendedtable1
-  node_out: biotuner1
-  slot_in: array_input3
-  slot_out: peaks_ratios_tuning
-- node_in: extendedtable1
-  node_out: biotuner1
-  slot_in: array_input1
-  slot_out: peaks
-- node_in: extendedtable1
-  node_out: biotuner1
-  slot_in: array_input2
-  slot_out: amps
 - node_in: extendedtable0
   node_out: welfordsztransform1
   slot_in: array_input2
   slot_out: normalized
-- node_in: oscout0
-  node_out: appendtables0
-  slot_in: data
-  slot_out: output_table
 nodes:
   appendtables0:
     _type: AppendTables
@@ -63,15 +63,18 @@ nodes:
       pos:
       - 1645
       - 656
+      viewers:
+        output_table:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
   biotuner0:
     _type: Biotuner
     category: analysis
@@ -79,51 +82,90 @@ nodes:
       pos:
       - 878
       - 85
+      viewers:
+        amps:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        cons:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        extended_amps:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        extended_peaks:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        harm_tuning:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        harmsim:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        peaks:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        peaks_ratios_tuning:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        subharm_tension:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        tenney:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       biotuner:
-        delta_lim:
-          _value: 250
-          vmax: 300
-          vmin: 1
-        f_max:
-          _value: 90.0
-          vmax: 100.0
-          vmin: 1.0
-        f_min:
-          _value: 2.0
-          vmax: 50.0
-          vmin: 0.1
-        n_harm_extended:
-          _value: 3
-          vmax: 10
-          vmin: 1
-        n_harm_subharm:
-          _value: 3
-          vmax: 10
-          vmin: 1
-        n_peaks:
-          _value: 7
-          vmax: 10
-          vmin: 1
-        peaks_function:
-          _value: harmonic_recurrence
-          options:
-          - EMD
-          - fixed
-          - harmonic_recurrence
-          - EIMC
-        precision:
-          _value: 0.1
-          vmax: 10.0
-          vmin: 0.01
+        delta_lim: 250
+        f_max: 90.0
+        f_min: 2.0
+        n_harm_extended: 3
+        n_harm_subharm: 3
+        n_peaks: 7
+        peaks_function: harmonic_recurrence
+        precision: 0.1
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
   biotuner1:
     _type: Biotuner
     category: analysis
@@ -131,51 +173,90 @@ nodes:
       pos:
       - 882
       - 596
+      viewers:
+        amps:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        cons:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        extended_amps:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        extended_peaks:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        harm_tuning:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        harmsim:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        peaks:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        peaks_ratios_tuning:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        subharm_tension:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+        tenney:
+          collapsed: true
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       biotuner:
-        delta_lim:
-          _value: 250
-          vmax: 300
-          vmin: 1
-        f_max:
-          _value: 90.0
-          vmax: 100.0
-          vmin: 1.0
-        f_min:
-          _value: 2.0
-          vmax: 50.0
-          vmin: 0.1
-        n_harm_extended:
-          _value: 3
-          vmax: 10
-          vmin: 1
-        n_harm_subharm:
-          _value: 3
-          vmax: 10
-          vmin: 1
-        n_peaks:
-          _value: 5
-          vmax: 10
-          vmin: 1
-        peaks_function:
-          _value: fixed
-          options:
-          - EMD
-          - fixed
-          - harmonic_recurrence
-          - EIMC
-        precision:
-          _value: 0.1
-          vmax: 10.0
-          vmin: 0.01
+        delta_lim: 250
+        f_max: 90.0
+        f_min: 2.0
+        n_harm_extended: 3
+        n_harm_subharm: 3
+        n_peaks: 5
+        peaks_function: fixed
+        precision: 0.1
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 0.2
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 0.2
   buffer0:
     _type: Buffer
     category: signal
@@ -183,27 +264,22 @@ nodes:
       pos:
       - 663
       - 215
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       buffer:
-        axis:
-          _value: -1
-          vmax: 3
-          vmin: -1
-        reset:
-          _value: false
-          trigger: true
-        size:
-          _value: 2000
-          vmax: 5000
-          vmin: 1
+        axis: -1
+        reset: false
+        size: 2000
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
   eegrecording0:
     _type: EEGRecording
     category: inputs
@@ -211,32 +287,17 @@ nodes:
       pos:
       - 202
       - 149
+      viewers: {}
     params:
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
       recording:
-        file_path:
-          _value: ''
-          options: null
-        file_sfreq:
-          _value: 256.0
-          vmax: 1000
-          vmin: 0.0
-        source_name:
-          _value: goofi
-          options: null
-        stream_name:
-          _value: goofi-stream
-          options: null
-        use_example_data:
-          _value: true
-          trigger: false
+        file_path: ''
+        file_sfreq: 256.0
+        source_name: goofi
+        stream_name: goofi-stream
+        use_example_data: true
   extendedtable0:
     _type: ExtendedTable
     category: inputs
@@ -244,46 +305,29 @@ nodes:
       pos:
       - 1376
       - 232
+      viewers:
+        table:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
       table:
-        param1:
-          _value: tenney
-          options: null
-        param10:
-          _value: value10
-          options: null
-        param2:
-          _value: cons
-          options: null
-        param3:
-          _value: value3
-          options: null
-        param4:
-          _value: value4
-          options: null
-        param5:
-          _value: value5
-          options: null
-        param6:
-          _value: value6
-          options: null
-        param7:
-          _value: value7
-          options: null
-        param8:
-          _value: value8
-          options: null
-        param9:
-          _value: value9
-          options: null
+        param1: tenney
+        param10: value10
+        param2: cons
+        param3: value3
+        param4: value4
+        param5: value5
+        param6: value6
+        param7: value7
+        param8: value8
+        param9: value9
   extendedtable1:
     _type: ExtendedTable
     category: inputs
@@ -291,46 +335,29 @@ nodes:
       pos:
       - 1253
       - 639
+      viewers:
+        table:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
       table:
-        param1:
-          _value: peaks
-          options: null
-        param10:
-          _value: value10
-          options: null
-        param2:
-          _value: amps
-          options: null
-        param3:
-          _value: tuning
-          options: null
-        param4:
-          _value: value4
-          options: null
-        param5:
-          _value: value5
-          options: null
-        param6:
-          _value: value6
-          options: null
-        param7:
-          _value: value7
-          options: null
-        param8:
-          _value: value8
-          options: null
-        param9:
-          _value: value9
-          options: null
+        param1: peaks
+        param10: value10
+        param2: amps
+        param3: tuning
+        param4: value4
+        param5: value5
+        param6: value6
+        param7: value7
+        param8: value8
+        param9: value9
   lslclient0:
     _type: LSLClient
     category: inputs
@@ -338,58 +365,40 @@ nodes:
       pos:
       - 202
       - 215
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       common:
-        autotrigger:
-          _value: true
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: true
+        max_frequency: 30.0
       lsl_stream:
-        refresh:
-          _value: false
-          trigger: true
-        source_name:
-          _value: goofi-stream
-          options: null
-        stream_name:
-          _value: ''
-          options: null
+        refresh: false
+        source_name: goofi
+        stream_name: ''
   oscout0:
     _type: OSCOut
     category: outputs
     gui_kwargs:
       pos:
-      - 1678
-      - 343
+      - 1704
+      - 365
+      viewers: {}
     params:
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
       osc:
-        address:
-          _value: localhost
-          options: null
-        broadcast:
-          _value: false
-          trigger: false
-        bundle:
-          _value: false
-          trigger: false
-        port:
-          _value: 5070
-          vmax: 65535
-          vmin: 0
-        prefix:
-          _value: /goofi
-          options: null
+        address: localhost
+        broadcast: false
+        bundle: false
+        port: 5070
+        prefix: /goofi
   reduce0:
     _type: Reduce
     category: array
@@ -397,28 +406,21 @@ nodes:
       pos:
       - 424
       - 211
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
       reduce:
-        axis:
-          _value: 0
-          vmax: 3
-          vmin: -1
-        method:
-          _value: mean
-          options:
-          - mean
-          - median
-          - min
-          - max
-          - std
+        axis: 0
+        method: mean
   welfordsztransform0:
     _type: WelfordsZTransform
     category: signal
@@ -426,26 +428,22 @@ nodes:
       pos:
       - 1130
       - 94
+      viewers:
+        normalized:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
       welford:
-        biased_std:
-          _value: false
-          trigger: false
-        outlier_stds:
-          _value: 4.0
-          vmax: 1.0
-          vmin: 0.0
-        reset:
-          _value: false
-          trigger: true
+        biased_std: false
+        outlier_stds: 4.0
+        reset: false
   welfordsztransform1:
     _type: WelfordsZTransform
     category: signal
@@ -453,23 +451,19 @@ nodes:
       pos:
       - 1130
       - 338
+      viewers:
+        normalized:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
     params:
       common:
-        autotrigger:
-          _value: false
-          trigger: false
-        max_frequency:
-          _value: 30.0
-          vmax: 60.0
-          vmin: 0.0
+        autotrigger: false
+        max_frequency: 30.0
       welford:
-        biased_std:
-          _value: false
-          trigger: false
-        outlier_stds:
-          _value: 4.0
-          vmax: 1.0
-          vmin: 0.0
-        reset:
-          _value: false
-          trigger: true
+        biased_std: false
+        outlier_stds: 4.0
+        reset: false
