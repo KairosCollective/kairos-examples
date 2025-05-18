@@ -1,7 +1,7 @@
 links:
-- node_in: select2
+- node_in: reduce0
   node_out: buffer0
-  slot_in: data
+  slot_in: array
   slot_out: out
 - node_in: smooth0
   node_out: buffer1
@@ -9,6 +9,18 @@ links:
   slot_out: out
 - node_in: smooth1
   node_out: buffer3
+  slot_in: data
+  slot_out: out
+- node_in: smooth2
+  node_out: buffer4
+  slot_in: data
+  slot_out: out
+- node_in: tablenormalization0
+  node_out: extendedtable0
+  slot_in: table
+  slot_out: table
+- node_in: select2
+  node_out: lslclient0
   slot_in: data
   slot_out: out
 - node_in: select4
@@ -23,9 +35,9 @@ links:
   node_out: phiid0
   slot_in: data
   slot_out: IIT
-- node_in: timedelayembedding1
+- node_in: filter0
   node_out: reduce0
-  slot_in: input_array
+  slot_in: data
   slot_out: out
 - node_in: buffer1
   node_out: select1
@@ -35,9 +47,9 @@ links:
   node_out: select1
   slot_in: array_input2
   slot_out: out
-- node_in: reduce0
+- node_in: buffer0
   node_out: select2
-  slot_in: array
+  slot_in: val
   slot_out: out
 - node_in: buffer3
   node_out: select3
@@ -47,26 +59,6 @@ links:
   node_out: select3
   slot_in: array_input1
   slot_out: out
-- node_in: phiid0
-  node_out: timedelayembedding1
-  slot_in: matrix
-  slot_out: embedded_array
-- node_in: buffer0
-  node_out: lslclient0
-  slot_in: val
-  slot_out: out
-- node_in: tablenormalization0
-  node_out: extendedtable0
-  slot_in: table
-  slot_out: table
-- node_in: oscout0
-  node_out: tablenormalization0
-  slot_in: data
-  slot_out: normalized
-- node_in: smooth2
-  node_out: buffer4
-  slot_in: data
-  slot_out: out
 - node_in: buffer4
   node_out: select4
   slot_in: val
@@ -75,14 +67,26 @@ links:
   node_out: select4
   slot_in: array_input3
   slot_out: out
+- node_in: oscout0
+  node_out: tablenormalization0
+  slot_in: data
+  slot_out: normalized
+- node_in: phiid0
+  node_out: timedelayembedding1
+  slot_in: matrix
+  slot_out: embedded_array
+- node_in: timedelayembedding1
+  node_out: filter0
+  slot_in: input_array
+  slot_out: filtered_data
 nodes:
   buffer0:
     _type: Buffer
     category: signal
     gui_kwargs:
       pos:
-      - -570
-      - -248
+      - -556
+      - -243
       viewers:
         out:
           collapsed: false
@@ -198,13 +202,55 @@ nodes:
         param7: value7
         param8: value8
         param9: value9
+  filter0:
+    _type: Filter
+    category: signal
+    gui_kwargs:
+      pos:
+      - -136
+      - -250
+      viewers:
+        filtered_data:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      bandpass:
+        apply: true
+        f_high: 50.0
+        f_low: 1.0
+        method: Causal
+        order: 3
+        padding: 0.1
+        ripple: 1.0
+        type: butterworth
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      notch:
+        Q: 10.0
+        apply: true
+        f_center: 60.0
+        method: Causal
+        order: 1
+        padding: 0.1
+        ripple: 1.0
+        type: butterworth
+      signal:
+        buffer_size: 512
+        demean: false
+        detrend: false
+        internal_buffer: false
   lslclient0:
     _type: LSLClient
     category: inputs
     gui_kwargs:
       pos:
-      - -785
-      - -248
+      - -978
+      - -245
       viewers:
         out:
           collapsed: false
@@ -281,8 +327,8 @@ nodes:
     category: array
     gui_kwargs:
       pos:
-      - -161
-      - -246
+      - -347
+      - -244
       viewers:
         out:
           collapsed: false
@@ -327,8 +373,8 @@ nodes:
     category: array
     gui_kwargs:
       pos:
-      - -366
-      - -242
+      - -768
+      - -249
       viewers:
         out:
           collapsed: false
@@ -343,7 +389,7 @@ nodes:
         max_frequency: 30.0
       select:
         axis: 0
-        exclude: ''
+        exclude: Right AUX
         expand_asterisk: false
         include: AF8, AF7
   select3:
@@ -516,4 +562,5 @@ nodes:
       embedding:
         delay: 512
         embedding_dimension: 3
+        exponent: 1.0
         moire_embedding: false
