@@ -1,142 +1,35 @@
-links:
-- node_in: filter0
-  node_out: buffer0
-  slot_in: data
-  slot_out: out
-- node_in: oscout0
-  node_out: extendedtable0
-  slot_in: data
-  slot_out: table
-- node_in: select1
-  node_out: filter0
-  slot_in: data
-  slot_out: filtered_data
-- node_in: extendedtable0
-  node_out: lempelziv0
-  slot_in: array_input2
-  slot_out: lzc
-- node_in: select0
-  node_out: lslclient0
-  slot_in: data
-  slot_out: out
-- node_in: extendedtable0
-  node_out: normalization0
-  slot_in: array_input5
-  slot_out: normalized
-- node_in: extendedtable0
-  node_out: normalization1
-  slot_in: array_input3
-  slot_out: normalized
-- node_in: extendedtable0
-  node_out: normalization2
-  slot_in: array_input4
-  slot_out: normalized
-- node_in: select3
-  node_out: phiid0
-  slot_in: data
-  slot_out: inf_dyn
-- node_in: select4
-  node_out: phiid0
-  slot_in: data
-  slot_out: inf_dyn
-- node_in: select2
-  node_out: phiid0
-  slot_in: data
-  slot_out: IIT
-- node_in: buffer0
-  node_out: reduce0
-  slot_in: val
-  slot_out: out
-- node_in: normalization0
-  node_out: reduce1
-  slot_in: data
-  slot_out: out
-- node_in: normalization1
-  node_out: reduce2
-  slot_in: data
-  slot_out: out
-- node_in: normalization2
-  node_out: reduce3
-  slot_in: data
-  slot_out: out
-- node_in: reduce0
-  node_out: select0
-  slot_in: array
-  slot_out: out
-- node_in: timedelayembedding0
-  node_out: select1
-  slot_in: input_array
-  slot_out: out
-- node_in: lempelziv0
-  node_out: select1
-  slot_in: data
-  slot_out: out
-- node_in: extendedtable0
-  node_out: select1
-  slot_in: array_input1
-  slot_out: out
-- node_in: reduce1
-  node_out: select2
-  slot_in: array
-  slot_out: out
-- node_in: reduce2
-  node_out: select3
-  slot_in: array
-  slot_out: out
-- node_in: reduce3
-  node_out: select4
-  slot_in: array
-  slot_out: out
-- node_in: phiid0
-  node_out: timedelayembedding0
-  slot_in: matrix
-  slot_out: embedded_array
 nodes:
   buffer0:
     _type: Buffer
     category: signal
-    gui_kwargs:
-      pos:
-      - 1073
-      - 391
-      viewers:
-        out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
       buffer:
+        size: 8.0
         axis: -1
+        unit: seconds
         reset: false
-        size: 2048
       common:
         autotrigger: false
         max_frequency: 30.0
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1077
+      - 390
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   extendedtable0:
     _type: ExtendedTable
     category: inputs
-    gui_kwargs:
-      pos:
-      - 1956
-      - 437
-      viewers:
-        table:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
-      common:
-        autotrigger: false
-        max_frequency: 30.0
       table:
         param1: eeg
-        param10: value10
         param2: lzc
         param3: up
         param4: down
@@ -145,479 +38,665 @@ nodes:
         param7: value7
         param8: value8
         param9: value9
-  filter0:
-    _type: Filter
-    category: signal
-    gui_kwargs:
-      pos:
-      - 1288
-      - 399
-      viewers:
-        filtered_data:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
-    params:
-      bandpass:
-        apply: true
-        f_high: 30.0
-        f_low: 2.0
-        method: Causal
-        order: 3
-        padding: 0.1
-        ripple: 1.0
-        type: butterworth
+        param10: value10
       common:
         autotrigger: false
         max_frequency: 30.0
-      notch:
-        Q: 10.0
-        apply: true
-        f_center: 60.0
-        method: Causal
-        order: 1
-        padding: 0.1
-        ripple: 1.0
-        type: butterworth
-      signal:
-        buffer_size: 512
-        demean: true
-        detrend: false
-        internal_buffer: false
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 2114
+      - 570
+      viewers:
+        table:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   lempelziv0:
     _type: LempelZiv
     category: analysis
-    gui_kwargs:
-      pos:
-      - 1706
-      - 207
-      viewers:
-        lzc:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
+      lempel_ziv:
+        binarization: mean
+        axis: -1
       common:
         autotrigger: false
         max_frequency: 30.0
-      lempel_ziv:
-        axis: -1
-        binarization: mean
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1783
+      - 359
+      viewers:
+        lzc:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   lslclient0:
     _type: LSLClient
     category: inputs
-    gui_kwargs:
-      pos:
-      - 436
-      - 387
-      viewers:
-        out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
+      lsl_stream:
+        source_name: Muse00:55:DA:BB:97:E0
+        stream_name: ''
+        refresh: true
       common:
         autotrigger: true
         max_frequency: 15.0
-      lsl_stream:
-        refresh: false
-        source_name: Muse00:55:DA:BB:97:E0
-        stream_name: ''
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 449
+      - 386
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   normalization0:
     _type: Normalization
     category: signal
-    gui_kwargs:
-      pos:
-      - 1713
-      - 1011
-      viewers:
-        normalized:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
-      common:
-        autotrigger: false
-        max_frequency: 30.0
-      minmax:
-        feature_max: 1.0
-        feature_min: 0.0
       normalization:
-        axis: -1
-        buffer_size: 1024
         method: minmax
+        buffer_size: 1024
         reset: true
+        axis: -1
       quantile:
         n_quantiles: 1000
         output_distribution: uniform
       robust:
-        quantile_max: 75
         quantile_min: 25
+        quantile_max: 75
         unit_variance: false
+      minmax:
+        feature_min: 0.0
+        feature_max: 1.0
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1707
+      - 1010
+      viewers:
+        normalized:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   normalization1:
     _type: Normalization
     category: signal
-    gui_kwargs:
-      pos:
-      - 1704
-      - 623
-      viewers:
-        normalized:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
-      common:
-        autotrigger: false
-        max_frequency: 30.0
-      minmax:
-        feature_max: 1.0
-        feature_min: 0.0
       normalization:
-        axis: -1
-        buffer_size: 1024
         method: minmax
+        buffer_size: 1024
         reset: true
+        axis: -1
       quantile:
         n_quantiles: 1000
         output_distribution: uniform
       robust:
-        quantile_max: 75
         quantile_min: 25
+        quantile_max: 75
         unit_variance: false
+      minmax:
+        feature_min: 0.0
+        feature_max: 1.0
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1701
+      - 621
+      viewers:
+        normalized:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   normalization2:
     _type: Normalization
     category: signal
-    gui_kwargs:
-      pos:
-      - 1711
-      - 821
-      viewers:
-        normalized:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
-      common:
-        autotrigger: false
-        max_frequency: 30.0
-      minmax:
-        feature_max: 1.0
-        feature_min: 0.0
       normalization:
-        axis: -1
-        buffer_size: 1024
         method: minmax
+        buffer_size: 1024
         reset: true
+        axis: -1
       quantile:
         n_quantiles: 1000
         output_distribution: uniform
       robust:
-        quantile_max: 75
         quantile_min: 25
+        quantile_max: 75
         unit_variance: false
-  oscout0:
-    _type: OSCOut
-    category: outputs
-    gui_kwargs:
-      pos:
-      - 2183
-      - 695
-      viewers: {}
-    params:
+      minmax:
+        feature_min: 0.0
+        feature_max: 1.0
       common:
         autotrigger: false
         max_frequency: 30.0
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1706
+      - 817
+      viewers:
+        normalized:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+  oscout0:
+    _type: OSCOut
+    category: outputs
+    params:
       osc:
         address: localhost
-        broadcast: false
-        bundle: false
         port: 8000
         prefix: /goofi
+        bundle: false
+        broadcast: false
+        require_change: false
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 2341
+      - 828
+      viewers: {}
   phiid0:
     _type: PhiID
     category: analysis
+    params:
+      PhiID:
+        tau: 5.0
+        kind: gaussian
+        redudancy: MMI
+        mode: one-vs-others
+        tgt_index: 0
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
     gui_kwargs:
       pos:
       - 1052
       - 631
       viewers:
-        IIT:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
         PhiID:
-          collapsed: true
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
           viewer_idx: 0
           width: 175
-        inf_dyn:
+          height: 100
           collapsed: false
-          height: 100
           log_scale_x: false
           log_scale_y: false
+        inf_dyn:
           viewer_idx: 0
           width: 175
-    params:
-      PhiID:
-        kind: gaussian
-        redudancy: MMI
-        tau: 5.0
-      common:
-        autotrigger: false
-        max_frequency: 30.0
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+        IIT:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   reduce0:
     _type: Reduce
     category: array
-    gui_kwargs:
-      pos:
-      - 856
-      - 385
-      viewers:
-        out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
+      reduce:
+        method: mean
+        axis: 0
       common:
         autotrigger: false
         max_frequency: 30.0
-      reduce:
-        axis: 0
-        method: mean
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 860
+      - 384
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   reduce1:
     _type: Reduce
     category: array
-    gui_kwargs:
-      pos:
-      - 1488
-      - 1006
-      viewers:
-        out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
+      reduce:
+        method: max
+        axis: 0
       common:
         autotrigger: false
         max_frequency: 30.0
-      reduce:
-        axis: 0
-        method: max
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1490
+      - 1011
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   reduce2:
     _type: Reduce
     category: array
-    gui_kwargs:
-      pos:
-      - 1495
-      - 619
-      viewers:
-        out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
+      reduce:
+        method: max
+        axis: 0
       common:
         autotrigger: false
         max_frequency: 30.0
-      reduce:
-        axis: 0
-        method: max
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1494
+      - 620
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   reduce3:
     _type: Reduce
     category: array
-    gui_kwargs:
-      pos:
-      - 1502
-      - 817
-      viewers:
-        out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
+      reduce:
+        method: max
+        axis: 0
       common:
         autotrigger: false
         max_frequency: 30.0
-      reduce:
-        axis: 0
-        method: max
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1494
+      - 816
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   select0:
     _type: Select
     category: array
-    gui_kwargs:
-      pos:
-      - 644
-      - 382
-      viewers:
-        out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
-      common:
-        autotrigger: false
-        max_frequency: 30.0
       select:
         axis: 0
+        include: ''
         exclude: Right AUX
         expand_asterisk: false
-        include: ''
-  select1:
-    _type: Select
-    category: array
-    gui_kwargs:
-      pos:
-      - 1489
-      - 400
-      viewers:
-        out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
-    params:
       common:
         autotrigger: false
         max_frequency: 30.0
-      select:
-        axis: 0
-        exclude: ''
-        expand_asterisk: false
-        include: '-512:'
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 658
+      - 384
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   select2:
     _type: Select
     category: array
-    gui_kwargs:
-      pos:
-      - 1268
-      - 1007
-      viewers:
-        out:
-          collapsed: false
-          height: 110
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 185
     params:
+      select:
+        axis: 0
+        include: Integrated information
+        exclude: ''
+        expand_asterisk: false
       common:
         autotrigger: false
         max_frequency: 30.0
-      select:
-        axis: 1
-        exclude: ''
-        expand_asterisk: false
-        include: Integrated information
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1271
+      - 1009
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 185
+          height: 110
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   select3:
     _type: Select
     category: array
+    params:
+      select:
+        axis: 0
+        include: Upward causation
+        exclude: ''
+        expand_asterisk: false
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
     gui_kwargs:
       pos:
       - 1275
       - 620
       viewers:
         out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
           viewer_idx: 0
           width: 175
-    params:
-      common:
-        autotrigger: false
-        max_frequency: 30.0
-      select:
-        axis: 1
-        exclude: ''
-        expand_asterisk: false
-        include: Upward causation
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   select4:
     _type: Select
     category: array
-    gui_kwargs:
-      pos:
-      - 1282
-      - 818
-      viewers:
-        out:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
-          viewer_idx: 0
-          width: 175
     params:
+      select:
+        axis: 0
+        include: Downward causation
+        exclude: ''
+        expand_asterisk: false
       common:
         autotrigger: false
         max_frequency: 30.0
-      select:
-        axis: 1
-        exclude: ''
-        expand_asterisk: false
-        include: Downward causation
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1274
+      - 814
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
   timedelayembedding0:
     _type: TimeDelayEmbedding
     category: signal
+    params:
+      embedding:
+        delay: 256
+        embedding_dimension: 2
+        moire_embedding: false
+        exponent: 1.0
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
     gui_kwargs:
       pos:
       - 838
       - 626
       viewers:
         embedded_array:
-          collapsed: false
-          height: 100
-          log_scale_x: false
-          log_scale_y: false
           viewer_idx: 0
           width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+  normalization3:
+    _type: Normalization
+    category: signal
     params:
+      normalization:
+        method: z-score
+        buffer_size: 1024
+        reset: true
+        axis: -1
+      quantile:
+        n_quantiles: 1000
+        output_distribution: uniform
+      robust:
+        quantile_min: 25
+        quantile_max: 75
+        unit_variance: false
+      minmax:
+        feature_min: 0.0
+        feature_max: 1.0
       common:
         autotrigger: false
         max_frequency: 30.0
-      embedding:
-        delay: 256
-        embedding_dimension: 2
-        exponent: 1.0
-        moire_embedding: false
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1487
+      - 396
+      viewers:
+        normalized:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+  filter0:
+    _type: Filter
+    category: signal
+    params:
+      bandpass:
+        apply: true
+        type: butterworth
+        method: Causal
+        order: 3
+        f_low: 1.0
+        f_high: 40.0
+        ripple: 1.0
+        padding: 0.1
+      notch:
+        apply: true
+        type: butterworth
+        method: Causal
+        order: 1
+        f_center: 50.0
+        Q: 10.0
+        ripple: 1.0
+        padding: 0.1
+      signal:
+        detrend: false
+        demean: false
+        internal_buffer: false
+        buffer_size: 512
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 1284
+      - 394
+      viewers:
+        filtered_data:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+  eegrecording0:
+    _type: EEGRecording
+    category: inputs
+    params:
+      recording:
+        use_example_data: true
+        file_path: ''
+        file_sfreq: 256.0
+        source_name: goofi
+        stream_name: recording
+        loop: true
+        reset: false
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 451
+      - 125
+      viewers: {}
+  lslclient1:
+    _type: LSLClient
+    category: inputs
+    params:
+      lsl_stream:
+        source_name: goofi
+        stream_name: ''
+        refresh: false
+      common:
+        autotrigger: true
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
+    gui_kwargs:
+      pos:
+      - 447
+      - 175
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+links:
+- node_out: buffer0
+  node_in: filter0
+  slot_out: out
+  slot_in: data
+- node_out: extendedtable0
+  node_in: oscout0
+  slot_out: table
+  slot_in: data
+- node_out: lempelziv0
+  node_in: extendedtable0
+  slot_out: lzc
+  slot_in: array_input2
+- node_out: normalization0
+  node_in: extendedtable0
+  slot_out: normalized
+  slot_in: array_input5
+- node_out: normalization1
+  node_in: extendedtable0
+  slot_out: normalized
+  slot_in: array_input3
+- node_out: normalization2
+  node_in: extendedtable0
+  slot_out: normalized
+  slot_in: array_input4
+- node_out: phiid0
+  node_in: select3
+  slot_out: inf_dyn
+  slot_in: data
+- node_out: phiid0
+  node_in: select4
+  slot_out: inf_dyn
+  slot_in: data
+- node_out: phiid0
+  node_in: select2
+  slot_out: IIT
+  slot_in: data
+- node_out: reduce0
+  node_in: buffer0
+  slot_out: out
+  slot_in: val
+- node_out: reduce1
+  node_in: normalization0
+  slot_out: out
+  slot_in: data
+- node_out: reduce2
+  node_in: normalization1
+  slot_out: out
+  slot_in: data
+- node_out: reduce3
+  node_in: normalization2
+  slot_out: out
+  slot_in: data
+- node_out: select0
+  node_in: reduce0
+  slot_out: out
+  slot_in: array
+- node_out: select2
+  node_in: reduce1
+  slot_out: out
+  slot_in: array
+- node_out: select3
+  node_in: reduce2
+  slot_out: out
+  slot_in: array
+- node_out: select4
+  node_in: reduce3
+  slot_out: out
+  slot_in: array
+- node_out: timedelayembedding0
+  node_in: phiid0
+  slot_out: embedded_array
+  slot_in: matrix
+- node_out: normalization3
+  node_in: lempelziv0
+  slot_out: normalized
+  slot_in: data
+- node_out: normalization3
+  node_in: timedelayembedding0
+  slot_out: normalized
+  slot_in: input_array
+- node_out: normalization3
+  node_in: extendedtable0
+  slot_out: normalized
+  slot_in: array_input1
+- node_out: filter0
+  node_in: normalization3
+  slot_out: filtered_data
+  slot_in: data
+- node_out: lslclient1
+  node_in: select0
+  slot_out: out
+  slot_in: data
